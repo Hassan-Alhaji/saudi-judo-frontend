@@ -61,6 +61,7 @@ type TicketDetail = {
   player_bank_account: string | null;
   player_fursan_number: string | null;
   player_id_expiry_date: string | null;
+  player_email: string | null;
   player_personal_photo: string | null;
   personal_photo: string | null;
   national_id_photo: string | null;
@@ -70,6 +71,7 @@ type TicketDetail = {
   // Coach info
   coach_name: string | null;
   coach_id: string | null;
+  coach_email: string | null;
   coach_region: string | null;
   test_evaluation_form: string | null;
   payment_receipt: string | null;
@@ -415,6 +417,7 @@ export default function TicketReviewPage() {
                 <div className="w-full space-y-2 text-sm mt-4">
                    <div className="flex justify-between border-b pb-1"><span className="text-gray-500">الجنسية:</span><span className="font-medium text-left">{ticket.player_nationality || '---'}</span></div>
                    <div className="flex justify-between border-b pb-1"><span className="text-gray-500">رقم الهوية:</span><span className="font-medium text-left" dir="ltr">{ticket.player_national_id || '---'}</span></div>
+                   <div className="flex justify-between border-b pb-1"><span className="text-gray-500">البريد الإلكتروني:</span><span className="font-medium text-left" dir="ltr">{ticket.player_email || '---'}</span></div>
                    <div className="flex justify-between border-b pb-1"><span className="text-gray-500">تاريخ الانتهاء:</span><span className="font-medium text-left">{ticket.player_id_expiry_date || '---'}</span></div>
                    <div className="flex justify-between border-b pb-1"><span className="text-gray-500">تاريخ الميلاد:</span><span className="font-medium text-left">{ticket.player_birth_date || '---'}</span></div>
                    <div className="flex justify-between border-b pb-1"><span className="text-gray-500">الجنس:</span><span className="font-medium text-left">{ticket.player_gender || '---'}</span></div>
@@ -443,6 +446,10 @@ export default function TicketReviewPage() {
                </div>
                <div className="p-4 space-y-2 text-sm">
                   <div className="font-bold text-base mb-2">{ticket.coach_name}</div>
+                  <div className="flex justify-between border-b border-gray-100 pb-1">
+                    <span className="text-gray-500">البريد الإلكتروني:</span>
+                    <span className="font-medium" dir="ltr">{ticket.coach_email || '---'}</span>
+                  </div>
                   <div className="flex justify-between border-b border-gray-100 pb-1">
                     <span className="text-gray-500">المنطقة:</span>
                     <span className="font-medium">
