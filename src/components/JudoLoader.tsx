@@ -18,12 +18,12 @@ export default function JudoLoader({ size = 'md', text = 'جاري التحمي�
 
   const content = (
     <div className={`flex flex-col items-center justify-center space-y-3 ${className}`}>
-      <div className={`relative ${currentSize} drop-shadow-lg animate-pulse`}>
+      <div className={`relative ${currentSize} drop-shadow-lg animate-spin`}>
         {/* Actual Saudi Judo Logo */}
         <img 
           src="/logo.png" 
           alt="Loading..." 
-          className="w-full h-full object-contain"
+          className="w-full h-full object-contain mix-blend-multiply"
         />
       </div>
       
