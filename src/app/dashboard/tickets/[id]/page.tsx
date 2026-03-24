@@ -739,6 +739,26 @@ export default function TicketReviewPage() {
                                    </div>
                                )}
 
+                               {canActAsCS && ticket.ticket_type !== 'profile_update' && (
+                                   <div className="bg-blue-50 p-4 rounded-xl border border-blue-200 mb-4 shadow-sm">
+                                      <h3 className="text-sm font-bold text-blue-900 border-b border-blue-100 pb-2 mb-3">استكمال وإجراءات خدمة العملاء</h3>
+                                      
+                                      <div className="bg-white p-3 rounded-lg border border-blue-100 mb-3">
+                                          <label className="block text-gray-700 font-bold mb-2 text-xs">توجيه التذكرة لمشرف المنطقة أو اللجنة (استمرار) *</label>
+                                          <select value={selectedEmployee} onChange={e => setSelectedEmployee(e.target.value)} className="w-full text-sm border border-gray-300 p-2.5 rounded-lg outline-none focus:border-blue-500 bg-gray-50 mb-3">
+                                              <option value="">-- اختر الموظف للتوجيه --</option>
+                                              {employees.map(e => <option key={e.id} value={e.id}>{e.name} ({e.role})</option>)}
+                                          </select>
+                                          <button disabled={!selectedEmployee || isSubmitting} onClick={() => handleAction('cs-forward', { assigned_user_id: selectedEmployee, notes: actionNotes })} className="w-full bg-blue-600 text-white text-sm font-bold py-2.5 rounded-lg hover:bg-blue-700 transition shadow-md">توجيه واستمرار التذكرة ↪️</button>
+                                      </div>
+
+                                      <div className="flex gap-2">
+                                          <button disabled={!actionNotes || isSubmitting} onClick={() => handleAction('cs-forward', { action: 'return_to_coach', notes: actionNotes })} className="flex-1 bg-orange-100 text-orange-800 text-sm font-bold py-2.5 rounded-lg hover:bg-orange-200 border border-orange-200 transition disabled:opacity-50">إرجاع للمدرب</button>
+                                          <button disabled={!actionNotes || isSubmitting} onClick={() => handleAction('cs-forward', { action: 'return_to_player', notes: actionNotes })} className="flex-1 bg-red-100 text-red-700 text-sm font-bold py-2.5 rounded-lg hover:bg-red-200 border border-red-200 transition disabled:opacity-50">إرجاع للاعب</button>
+                                      </div>
+                                   </div>
+                               )}
+
                                {canActAsCS && ticket.ticket_type === 'profile_update' && (
                                    <div className="bg-purple-50 p-4 rounded-xl border border-purple-200">
                                       <h3 className="text-sm font-bold text-purple-900 border-b border-purple-100 pb-2 mb-3">مراجعة تحديث البيانات</h3>
