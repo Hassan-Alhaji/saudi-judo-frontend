@@ -648,14 +648,19 @@ export default function TicketReviewPage() {
                          </div>
                      ) : (
                          <div className="animate-in fade-in bg-gray-50 p-4 border border-gray-200 rounded-xl shadow-sm">
-                             <h4 className="font-bold text-gray-800 text-sm mb-3">رد أو اتخاذ إجراء</h4>
+                             <h4 className="font-bold text-gray-800 text-sm mb-3">اتخاذ إجراء</h4>
                              <textarea 
                                 value={actionNotes} 
                                 onChange={e => setActionNotes(e.target.value)} 
                                 rows={3} 
-                                placeholder="اكتب ردك أو استفسارك هنا (إلزامي في حال الإرجاع أو الرفض)..." 
+                                placeholder="اكتب ملاحظاتك هنا (إلزامي في حال الإرجاع أو الرفض)..." 
                                 className="w-full text-sm border border-gray-300 p-3 rounded-xl outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all bg-white resize-none"
                              ></textarea>
+                             {!actionNotes.trim() && (
+                                <p className="text-red-500 text-xs mt-2 font-bold">
+                                    تنبيه: يجب كتابة السبب في المربع أعلاه لتفعيل عملية الإرجاع أو الرفض.
+                                </p>
+                             )}
                              
                              <div className="mt-4 flex flex-col gap-3">
                                {canActAsCoach && (
@@ -754,20 +759,7 @@ export default function TicketReviewPage() {
                                    </div>
                                )}
 
-                               <div className="flex flex-col sm:flex-row justify-between items-center gap-3 pt-3 mt-1 border-t border-gray-200">
-                                   <div>
-                                     {(canActAsCS || isAdmin || canActAsCEO || canActAsSupervisor || canActAsCommittee) && (
-                                         <label className="flex items-center gap-2 cursor-pointer bg-yellow-50/50 p-2 rounded-lg border border-yellow-100 hover:bg-yellow-50 transition-colors w-max">
-                                             <input type="checkbox" id="closeTicketCheck" className="w-4 h-4 text-yellow-600 rounded border-yellow-300 focus:ring-yellow-500" />
-                                             <span className="text-xs font-bold text-yellow-800">🔒 إغلاق التذكرة بعد الرد</span>
-                                         </label>
-                                     )}
-                                   </div>
-                                   <button disabled={!actionNotes || isSubmitting} onClick={() => { const closeCheckbox = document.getElementById('closeTicketCheck') as HTMLInputElement; handleAction('reply', { reply_text: actionNotes, close_ticket: closeCheckbox?.checked || false }) }} className="w-full sm:w-auto bg-blue-600 text-white text-sm font-bold py-2.5 px-6 rounded-xl hover:bg-blue-700 disabled:opacity-50 transition-all shadow-md active:scale-95 flex items-center justify-center gap-2">
-                                       <span>إرسال رد (بدون إجراء)</span>
-                                       <svg className="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
-                                   </button>
-                               </div>
+
 
                              </div>
                          </div>
